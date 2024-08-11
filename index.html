@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Generator</title>
+    <style>
+         @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+        body {
+
+           font-family: "Poppins", sans-serif;
+           background-color: #014179;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .quote-generator {
+
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            min-width: 600px;
+            text-align: center;
+            height: 200px;
+        }
+
+        .quote-generator h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        #quote-text {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        #quote-author {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .generate-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .generate-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quote-generator">
+    <h1>Random Quote Generator</h1>
+    <div id="quote-text">"The only limit to our realization of tomorrow is our doubts of today."</div>
+    <div id="quote-author">- Franklin D. Roosevelt</div>
+    <button class="generate-btn" onclick="foo()">Generate New Quote</button>
+</div>
+
+
+<script>
+
+    let Quotess = document.getElementById('quote-text');
+
+    let authar = document.getElementById('quote-author');
+
+
+    function foo(){
+
+        fetch('https://type.fit/api/quotes')
+        
+        .then(res => res.json())
+        
+        .then( data => {
+            
+            let quotesFromAPI = Math.floor(Math.random()*data.length)
+            
+        let APIConvert = data[quotesFromAPI];
+        
+        
+        
+        console.log(APIConvert);
+        
+        Quotess.innerText = APIConvert.text ;
+        authar.innerText = APIConvert.author ;
+        
+        
+        
+    })
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+
+fetch('https://type.fit/api/quotes')
+.then( res => res.json())
+.then( data => console.log('Success' , data))
+
+.catch( Error => console.error( 'Error', Error)
+)
+    </script>
+    
+</body>
+</html> -->
